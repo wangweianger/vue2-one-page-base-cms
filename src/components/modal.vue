@@ -150,7 +150,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 .modal {
   transition: all 0.3s ease;
 }

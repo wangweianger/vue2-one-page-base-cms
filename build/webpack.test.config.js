@@ -51,4 +51,20 @@ config.plugins = (config.plugins || []).concat([
   new webpack.optimize.OccurenceOrderPlugin()
 ])
 
+
+// 集成环境http-push
+if(process.env.HTTP_PUSH == 'test-build'){
+  var httpPushTarGz = require('./http.push.tar.gz.js')
+  new httpPushTarGz({
+     receiver  : 'http://127.0.0.1:1234/receiver',   //查看所有的参数请到 http.push.tar.gz.js 文件中查看
+  });
+};
+
+
+
 module.exports = config
+
+
+
+
+

@@ -8,6 +8,9 @@
 >  * vuex             前端状态管理 类式于flux 和 radux
 >  * babel            es6转译工具，用最前言的javascript做前端开发
 
+## 图片
+![图片](https://gitee.com/uploads/images/2017/1013/183050_be6f69e3_818875.png "在这里输入图片标题")
+
 
 ## 目录结构
 
@@ -84,78 +87,3 @@ vue-loader ：模块化的开发vue插件
 vue-router ：vue的路由插件
 vuex  :  一个专门为 Vue.js 应用设计的状态管理架构
 ```
-
-
-
-
-
-### 本地自动上传代码说明
-
-**------------------- **webpack 方式 集成环境发布配置   以后台cms为例子** -----------------------------**
-### 1.安装本地依赖  
-  http-push-webpack-plugin    
-  underscore
-  cross-env
-
-
-### 2.webpack.product.config.js  新增http-push代码 代码如下
-
-```
-var HttpPushWebpackPlugin = require('http-push-webpack-plugin');  //http-push
-
-// webpack http-push 上传
-if(process.env.HTTP_PUSH === 'http-push' ){
-    config.plugins = (config.plugins || []).concat([
-        new HttpPushWebpackPlugin({
-            receiver: 'http://xxx.com/receiver', // 服务端文件上传接口
-            token: 'webpack', // 验证token
-            to: '../../html/wangwei', // 注意这个是指的是测试机器的路径，而非本地机器
-        }),
-    ])
-};
-
-```
-### 3.新增package.json  script运行脚本 脚本如下：
-
-```
-"http-push": "cross-env HTTP_PUSH=http-push webpack -p --progress --hide-modules --colors --config build/webpack.product.config.js",
-
-```
-/*------------------------------------------------------------------------------------------*/
-
-
-
-
-**------------------- **FIS3方式 集成环境发布配置   以后台cms为例子** -----------------------------**
-### 1.开发根目录（package.js同级目录新增文件） fis-conf.js
-
-
-### 2.项目安装依赖：
- 
-    "fis3" , //全局安装  
-    "fis3-deploy-http-push": "^2.0.6"  //项目依赖安装
-
-
-### 3.配置package.js  新增启动项   “dist":"fis3 release dist"
-
-
-### 4.配置fis-confi.js  代码如下：
-
-```
-fis.media('qa').match('dist/test/**', {
-  deploy: fis.plugin('http-push', {
-    receiver: 'http://xxx.com/receiver',
-    to: '../../html/wangwei', // 注意这个是指的是测试机器的路径，而非本地机器
-    data: {
-      base: 'dist/test'
-    }
-  })
-});
-
-```
- **演示图文：** 
-![输入图片说明](http://git.oschina.net/uploads/images/2017/0320/172324_5885af35_818875.png "在这里输入图片标题")
-
-/*------------------------------------------------------------------------------------------*/
-
-

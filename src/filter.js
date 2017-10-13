@@ -27,7 +27,7 @@ json = Object.assign(json, {
 	},
 	//货币过滤器
 	currency(value, symbol, digit, bwf, gwf) {
-		if (value!=0 && !value) return;
+		if (!value) return;
 		return accounting.formatMoney(value, symbol || '¥', digit || 2, bwf || ',', gwf || '.'); // ¥4,999.99
 	},
 	// 时间过滤器

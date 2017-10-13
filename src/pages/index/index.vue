@@ -23,8 +23,8 @@
         时间二
         <select-time-common :begin="moretime.begin2" :end="moretime.end1" :datas="moretime.datas2" @onPropsChanges="change"></select-time-common>
 
-
-        <vue-calendar style="margin-top:50px;" :option.sync="option"></vue-calendar>
+        <div style="margin-top:50px;">时间选择器：</div>
+        <vue-date-calendar :option.sync="option"></vue-date-calendar>
 
     ECharts
     <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
@@ -37,20 +37,20 @@
     import Vue from 'vue'
     import page from 'components/page'
     import selectTimeCommon from 'components/select_time_common'
-    // import zaneDate from 'common/lib/zaneDate/zane-calendar'
-    import vueCalendar from 'vue-calendar'
+    import vueDateCalendar from 'vue-date-calendar'
 
     export default {
         components: {
            page,
            selectTimeCommon,
-           vueCalendar,
+           vueDateCalendar,
         },
         data(){
             return {
                 option:{
                     elem:'#demo1',
-                    type:'doubleday',
+                    type:'day',
+                    behindTop:5,
                     value:'2017-09-20',
                     style:''
                 },

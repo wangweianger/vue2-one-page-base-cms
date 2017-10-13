@@ -38,7 +38,7 @@ export default {
       default: 0,
     },
     isSearch:{
-      type:Boolean,
+      type:null,
       default:false,
     }
   },
@@ -58,6 +58,7 @@ export default {
         setTimeout(()=>{
             this.p_isSearch=false;
         }, 100);
+        console.log(211)
         this.gitPages();
       }
     }

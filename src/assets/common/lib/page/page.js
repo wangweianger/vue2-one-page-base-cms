@@ -1,8 +1,7 @@
-import common from 'common/js/common'
+import util from 'common/js/util'
 import popup from 'popup'
 
 function Page(json) {
-	this.isSearch = json.isSearch
 	this.route = json.route;
 	this.routerName = json.routerName;
 	this.nowPage = parseInt(json.nowPage); //当前页
@@ -35,19 +34,6 @@ Page.prototype.init = function() {
 	this.pageSearch(); //搜索页
 	this.parent.append(this.html);
 	this.callback();
-	if (this.isSearch) {
-		//请求路由
-		var query = Object.assign(JSON.parse(JSON.stringify(this.route.query)), {
-			page: 1,
-			resTime: new Date().getTime()
-		})
-		console.log(query);
-		router.push({
-			path: this.routerName,
-			query: query
-		})
-		this.getPage(1);
-	};
 }
 
 //循环页数
@@ -123,7 +109,7 @@ Page.prototype.totalPageText = function() {
 //搜索页数
 Page.prototype.pageSearch = function() {
 	if (this.totalPage > this.setting.defaultPage) {
-		this.html += "<span class='Page-search-span'>跳转到<input type='text' _onkeypress='return common.IsNum(event)' id='Page-search'>页</span><button id='pageSearch'>确定</button>"
+		this.html += "<span class='Page-search-span'>跳转到<input type='text' _onkeypress='return util.IsNum(event)' id='Page-search'>页</span><button id='pageSearch'>确定</button>"
 	}
 }
 
@@ -136,12 +122,11 @@ Page.prototype.callback = function() {
 			event.preventDefault(); //阻止默认行为 ( 表单提交 )
 			var nowPage = $(this).attr("href").substring(1);
 			//请求路由
-			var query = Object.assign(JSON.parse(JSON.stringify(This.route.query)), {
-				page: nowPage
-			});
 			router.push({
-				path: This.routerName,
-				query: query
+				name: This.routerName,
+				query: {
+					page: nowPage
+				}
 			})
 			This.getPage(nowPage);
 		});
@@ -166,12 +151,11 @@ Page.prototype.callback = function() {
 			}
 			if (parseInt(nowPage) > 0) {
 				//请求路由
-				var query = Object.assign(JSON.parse(JSON.stringify(This.route.query)), {
-					page: nowPage
-				});
 				router.push({
 					name: This.routerName,
-					query: query
+					query: {
+						page: nowPage
+					}
 				})
 				This.getPage(nowPage);
 			}
@@ -206,7 +190,7 @@ Page.prototype.callback = function() {
 
 /*请求分页函数*/
 Page.prototype.getPage = function(nowPage) {
-	// common.showLoading();
+	// util.showLoading();
 	this.parent.html(""); //清空
 	//写入分页
 	new Page({

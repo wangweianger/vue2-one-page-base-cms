@@ -67,9 +67,9 @@ config.plugins = (config.plugins || []).concat([
 if(process.env.HTTP_PUSH === 'http-push' ){
     config.plugins = (config.plugins || []).concat([
         new HttpPushWebpackPlugin({
-            receiver: 'http://dev-upload.morning-star.cn/receiver', // 服务端文件上传接口
-            token: 'webpack', // 验证token
-            to: '../../html/wangwei', // 注意这个是指的是测试机器的路径，而非本地机器
+            receiver: 'http://127.0.0.1:1234/receiver', // 服务端文件上传接口
+            token: '../html/wangwei', // 验证token
+            to: '../html/wangwei', // 注意这个是指的是测试机器的路径，而非本地机器
         }),
     ])
 };
