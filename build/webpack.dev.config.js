@@ -6,14 +6,11 @@ config.devServer= {
     hot: true,
     inline: true,
     proxy: {
-      "http://127.0.0.1:5000/": {
-          target: 'http://test.oms.morning-star.cn/',
-          secure: false
+      "/": {
+          target: 'http://xxx.cn/',
+          secure: false,
+          changeOrigin: true
       },
-      "http://127.0.0.1:4000/": {
-          target: 'http://test.venus.morning-star.cn/',
-          secure: false
-      }
     }
 }
 config.devtool = '#source-map'
